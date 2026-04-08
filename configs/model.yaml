@@ -1,0 +1,55 @@
+# Model configuration
+model:
+  device: "auto"  # auto, cuda, mps, cpu
+  random_seed: 42
+  
+  # Baseline models
+  baseline:
+    random_forest:
+      n_estimators: 100
+      max_depth: 10
+      random_state: 42
+    
+    xgboost:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+      random_state: 42
+    
+    lightgbm:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+      random_state: 42
+  
+  # Deep learning model
+  neural_network:
+    hidden_layers: [64, 32]
+    dropout_rate: 0.2
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 50
+    patience: 10
+
+# Evaluation configuration
+evaluation:
+  test_size: 0.2
+  validation_size: 0.2
+  cv_folds: 5
+  
+  metrics:
+    classification:
+      - accuracy
+      - precision_macro
+      - recall_macro
+      - f1_macro
+      - roc_auc_ovr
+      - roc_auc_ovo
+    
+    multilabel:
+      - jaccard_score
+      - hamming_loss
+      - subset_accuracy
+      - coverage_error
+      - label_ranking_loss
+      - label_ranking_average_precision_score

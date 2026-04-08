@@ -1,0 +1,136 @@
+# Data configuration
+data:
+  raw_path: "data/raw"
+  processed_path: "data/processed"
+  external_path: "data/external"
+  
+  # Synthetic data generation parameters
+  synthetic:
+    n_samples: 2000
+    n_species: 5
+    features:
+      - sound_activity
+      - vegetation_index
+      - time_of_day
+      - temperature
+      - humidity
+      - light_level
+      - wind_speed
+      - precipitation
+    
+  # Species definitions
+  species:
+    bird:
+      name: "Bird"
+      icon: "🕊️"
+      conditions:
+        sound_activity: [40, 80]
+        time_of_day: [5, 10]
+        temperature: [15, 30]
+    
+    monkey:
+      name: "Monkey"
+      icon: "🐒"
+      conditions:
+        vegetation_index: [0.65, 1.0]
+        time_of_day: [6, 18]
+        temperature: [20, 35]
+    
+    insect:
+      name: "Insect"
+      icon: "🦗"
+      conditions:
+        temperature: [20, 40]
+        time_of_day: [18, 23]
+        humidity: [0.4, 0.9]
+    
+    reptile:
+      name: "Reptile"
+      icon: "🦎"
+      conditions:
+        temperature: [25, 40]
+        time_of_day: [10, 16]
+        light_level: [0.7, 1.0]
+    
+    amphibian:
+      name: "Amphibian"
+      icon: "🐸"
+      conditions:
+        humidity: [0.6, 1.0]
+        temperature: [15, 25]
+        precipitation: [0.1, 1.0]
+
+# Model configuration
+model:
+  device: "auto"  # auto, cuda, mps, cpu
+  random_seed: 42
+  
+  # Baseline models
+  baseline:
+    random_forest:
+      n_estimators: 100
+      max_depth: 10
+      random_state: 42
+    
+    xgboost:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+      random_state: 42
+    
+    lightgbm:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+      random_state: 42
+  
+  # Deep learning model
+  neural_network:
+    hidden_layers: [64, 32]
+    dropout_rate: 0.2
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 50
+    patience: 10
+
+# Evaluation configuration
+evaluation:
+  test_size: 0.2
+  validation_size: 0.2
+  cv_folds: 5
+  
+  metrics:
+    classification:
+      - accuracy
+      - precision_macro
+      - recall_macro
+      - f1_macro
+      - roc_auc_ovr
+      - roc_auc_ovo
+    
+    multilabel:
+      - jaccard_score
+      - hamming_loss
+      - subset_accuracy
+      - coverage_error
+      - label_ranking_loss
+      - label_ranking_average_precision_score
+
+# Visualization configuration
+visualization:
+  figure_size: [12, 8]
+  dpi: 300
+  style: "seaborn-v0_8"
+  
+  colors:
+    primary: "#2E86AB"
+    secondary: "#A23B72"
+    success: "#F18F01"
+    warning: "#C73E1D"
+    info: "#6A994E"
+  
+  map:
+    default_zoom: 10
+    center_lat: 40.7128
+    center_lon: -74.0060
+    tile: "OpenStreetMap"
